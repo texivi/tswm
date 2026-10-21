@@ -1,0 +1,10 @@
+#!/bin/sh
+# nested test session: ./run-xephyr [:display] [WxH]
+D=${1:-:9}; SZ=${2:-1280x800}
+cd "$(dirname "$(readlink -f "$0")")" || exit 1
+[ -x bin/tswm ] || make || exit 1
+Xephyr "$D" -screen "$SZ" -ac -br -title "TSWM" &
+XP=$!
+sleep 1
+DISPLAY=$D ./bin/tswm &
+wait $XP

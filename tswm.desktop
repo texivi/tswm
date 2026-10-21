@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=TSWM
+Comment=The retro Syllable desktop experience
+Exec=tswm-session
+TryExec=tswm
+Type=XSession
+DesktopNames=TSWM

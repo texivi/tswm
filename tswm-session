@@ -1,0 +1,11 @@
+#!/bin/sh
+# session entry for display managers (started from tswm.desktop) or .xinitrc
+export XDG_CURRENT_DESKTOP=TSWM XDG_SESSION_DESKTOP=TSWM XDG_SESSION_TYPE=x11
+mkdir -p "$HOME/.local/state"
+[ -r /etc/profile ] && . /etc/profile
+[ -r "$HOME/.profile" ] && . "$HOME/.profile"
+xsetroot -cursor_name left_ptr 2>/dev/null
+if [ -z "$DBUS_SESSION_BUS_ADDRESS" ] && command -v dbus-run-session >/dev/null 2>&1; then
+	exec dbus-run-session -- tswm >"$HOME/.local/state/tswm.log" 2>&1
+fi
+exec tswm >"$HOME/.local/state/tswm.log" 2>&1
